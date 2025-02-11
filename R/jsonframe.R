@@ -21,8 +21,8 @@ JSONFrame <- R6::R6Class(
         colnames(data_row) <- unlist(json_frame()$columns)
         return(data_row)
       }) |>
-        purrr::list_rbind()
-          return(data_frame)
+        data.table::rbindlist()
+      return(data_frame)
     },
     filter = function(input, filter_expression) {
       private$session$sendCustomMessage("filterJSONFrame", filter_expression)
