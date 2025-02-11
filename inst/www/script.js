@@ -1,5 +1,5 @@
 function createJSONFrame(jsonString) {
-  let jsonData  = getJSONData(jsonString);
+  let jsonData  = processJSONData(jsonString);
   Shiny.setInputValue("json_frame", jsonData);
 }
 
@@ -23,6 +23,25 @@ function getJSONData(inputString) {
   let jsonString = inputString.replace(/'/g, '"').replace(/(\w+):/g, '"$1":');
   const jsonData = JSON.parse(jsonString);
   return(jsonData);
+}
+
+function processJSONData(inputString) {
+  const jsonData = JSON.parse(inputString);
+  const columns = new Set();
+  jsonData.forEach(item => {
+    Object.keys(item).forEach(key => {
+      columns.add(key);
+    });
+  });
+  const colArray = Array.from(columns);
+  const rowData = jsonData.map(item => {
+    return colArray.map(col => {
+      if (typeof item[col] === 'object') return JSON.stringify(item[col]);
+      return item[col] !== undefined ? item[col] : '';
+    });
+  });
+
+  return{ columns: colArray, data: rowData }
 }
 
 function filterData(data, columns, columnName, condition) {
