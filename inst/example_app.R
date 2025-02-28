@@ -138,12 +138,7 @@ server <- function(input, output, session) {
     req(input$json_frame)
     my_json_frame$get_json(input)
   })
-  
-  # Render data table
-  output$data_table <- renderTable({
-    req(input$json_frame)
-    my_json_frame$get_data_frame(input)
-  })
+
 }
 
 # Run the application
