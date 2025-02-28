@@ -1,72 +1,25 @@
 // Function to create JSON frame
 function createJSONFrame(jsonString) {
-  let jsonData = processJSONData(jsonString);
-  Shiny.setInputValue("json_frame", jsonData);
+  Shiny.setInputValue("json_frame", jsonString);
 }
 
 Shiny.addCustomMessageHandler("createJSONFrame", createJSONFrame);
 
 // Function to filter JSON frame
 function filterJSONFrame(params) {
-  let jsonFrame = processJSONData(params.original_data);
-  let filterParameters = parseFilterExpression(params.filter_expression);
-  let jsonFilteredData = filterData(
-    jsonFrame.data,
-    jsonFrame.columns,
-    filterParameters.columnName,
-    filterParameters.condition
-  );
-  Shiny.setInputValue("json_frame", jsonFilteredData);
+  let data = JSON.parse(params.original_data);
+  let filterExpression = preprocessFilterExpression(params.filter_expression);
+  let filteredData = filterData(data, filterExpression);
+  Shiny.setInputValue("json_frame", JSON.stringify(filteredData));
 }
 
 Shiny.addCustomMessageHandler("filterJSONFrame", filterJSONFrame);
 
-// Helper function to process JSON string
-function processJSONData(inputString) {
-  const jsonData = JSON.parse(inputString);
-  const columns = new Set();
-  jsonData.forEach(item => {
-    Object.keys(item).forEach(key => {
-      columns.add(key);
-    });
-  });
-  const colArray = Array.from(columns);
-  const rowData = jsonData.map(item => {
-    return colArray.map(col => item[col] !== undefined ? item[col] : '');
-  });
-
-  return { columns: colArray, data: rowData };
+function preprocessFilterExpression(filterExpression) {
+  return filterExpression.replace(/\b([a-zA-Z_]\w*)\b(?![\'\.])/g, "item.$1");
 }
 
-// Helper function to filter data
-function filterData(data, columns, columnName, condition) {
-  const columnIndex = columns.indexOf(columnName);
-  if (columnIndex === -1) {
-    throw new Error(`Column '${columnName}' not found.`);
-  }
-  data = data.filter(row => condition(row[columnIndex]));
-  return { columns, data };
-}
-
-// Helper function to parse filter expression
-function parseFilterExpression(expression) {
-  const match = expression.match(/(\w+)\s*(==|>=|<=|>|<)\s*('?[^']+'?)/);
-  if (!match) {
-    throw new Error('Invalid filter expression');
-  }
-  const [, columnName, operator, value] = match;
-
-  // Determine the condition function based on the operator
-  const conditionFunctions = {
-    '==': val => val == (value.startsWith("'") ? value.slice(1, -1) : value),
-    '>=': val => val >= Number(value),
-    '<=': val => val <= Number(value),
-    '>': val => val > Number(value),
-    '<': val => val < Number(value)
-  };
-
-  return {
-    columnName,
-    condition: conditionFunctions[operator]
-  };
+function filterData(data, filter_expression) {
+  const expression = new Function('item', `return ${filter_expression};`);
+  return data.filter(expression);
 }
