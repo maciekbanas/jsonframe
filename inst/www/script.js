@@ -1,13 +1,11 @@
-// Function to create JSON frame
-function createJSONFrame(jsonString) {
-  Shiny.setInputValue("json_frame", jsonString);
+function sendJSONFrame(jsonString) {
+  Shiny.setInputValue("json_frame", JSON.stringify(eval(jsonString)));
 }
 
-Shiny.addCustomMessageHandler("createJSONFrame", createJSONFrame);
+Shiny.addCustomMessageHandler("sendJSONFrame", sendJSONFrame);
 
-// Function to filter JSON frame
 function filterJSONFrame(params) {
-  let data = JSON.parse(params.original_data);
+  let data = eval(params.original_data);
   let filterExpression = preprocessFilterExpression(params.filter_expression);
   let filteredData = filterData(data, filterExpression);
   Shiny.setInputValue("json_frame", JSON.stringify(filteredData));
