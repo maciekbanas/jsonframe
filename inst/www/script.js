@@ -7,8 +7,8 @@ Shiny.addCustomMessageHandler("sendJSONFrame", sendJSONFrame);
 function filterJSONFrame(params) {
   let data = eval(params.original_data);
   let filterExpression = preprocessFilterExpression(params.filter_expression);
-  let filteredData = filterData(data, filterExpression);
-  Shiny.setInputValue("json_frame", JSON.stringify(filteredData));
+  let json_frame = filterData(data, filterExpression);
+  Shiny.setInputValue("json_frame", JSON.stringify(json_frame));
 }
 
 Shiny.addCustomMessageHandler("filterJSONFrame", filterJSONFrame);
