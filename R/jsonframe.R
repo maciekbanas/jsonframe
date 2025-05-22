@@ -4,9 +4,12 @@
 #' @name include_jsonframe
 #' @export
 include_jsonframe <- function() {
-  shiny::addResourcePath("www", system.file("www", package = "jsonframe"))
-  htmltools::tags$head(
-    htmltools::tags$script(src = "www/script.js")
+  htmltools::htmlDependency(
+    name = "jsonframe",
+    version = utils::packageVersion("jsonframe"),
+    package = "jsonframe",
+    src = "www",
+    script = "script.js"
   )
 }
 
