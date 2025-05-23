@@ -30,7 +30,6 @@ JSONFrame <- R6::R6Class(
     #' @param input A `Shiny` input parameter.
     #' @param session A `Shiny` session parameter.
     get_json = function(input, session = shiny::getDefaultReactiveDomain()) {
-      session$sendCustomMessage("sendJSONFrame", "json_frame")
       as.character(input$json_frame)
     },
     #' @description Send `JSON` data to the browser.

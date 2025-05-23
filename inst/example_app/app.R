@@ -1,4 +1,4 @@
-library(jsonframe)
+pkgload::load_all()
 
 ui <- fluidPage(
   include_jsonframe(),
@@ -8,16 +8,16 @@ ui <- fluidPage(
       {"name": "Bob", "age": 30, "city": "San Francisco"},
       {"name": "Charlie", "age": 35, "city": "Los Angeles"},
       {"name": "David", "age": 40, "city": "Chicago"},
-      {"name": "Eve", "age": 28, "city": "Houston"},
+      {"name": "Eve", "age": 28, "city": "New York"},
       {"name": "Frank", "age": 45, "city": "Phoenix"},
       {"name": "Grace", "age": 32, "city": "Philadelphia"},
-      {"name": "Heidi", "age": 38, "city": "San Antonio"},
-      {"name": "Ivan", "age": 50, "city": "San Diego"},
-      {"name": "Judy", "age": 22, "city": "Dallas"},
+      {"name": "Heidi", "age": 38, "city": "Phoenix"},
+      {"name": "Ivan", "age": 50, "city": "New York"},
+      {"name": "Judy", "age": 22, "city": "Chicago"},
       {"name": "Karl", "age": 28, "city": "San Jose"},
       {"name": "Laura", "age": 31, "city": "Austin"},
-      {"name": "Mallory", "age": 37, "city": "Jacksonville"},
-      {"name": "Nathan", "age": 42, "city": "Fort Worth"}]')
+      {"name": "Mallory", "age": 37, "city": "Phoenix"},
+      {"name": "Nathan", "age": 42, "city": "Los Angeles"}]')
   ),
   titlePanel("JSONFrame Shiny App"),
   sidebarLayout(
