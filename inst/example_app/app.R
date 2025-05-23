@@ -45,7 +45,7 @@ server <- function(input, output, session) {
   })
   
   output$dataset_name <- shiny::renderText({
-    my_json_frame$get_data_name(input)
+    my_json_frame$get_jsonframe_name(input)
   })
   
   output$filter_translation <- shiny::renderText({
@@ -53,7 +53,7 @@ server <- function(input, output, session) {
   })
   
   output$json_string <- shiny::renderText({
-    my_json_frame$get_json(input)
+    my_json_frame$get_jsonframe(input)
   })
 
 }

@@ -1,7 +1,6 @@
 function sendJSONFrame(jsonString) {
   Shiny.setInputValue("json_frame", JSON.stringify(eval(jsonString)));
 }
-
 Shiny.addCustomMessageHandler("sendJSONFrame", sendJSONFrame);
 
 function filterJSONFrame(params) {
@@ -11,7 +10,6 @@ function filterJSONFrame(params) {
   let filteredJSON = filterData(data, filterExpression);
   Shiny.setInputValue("json_frame", JSON.stringify(filteredJSON));
 }
-
 Shiny.addCustomMessageHandler("filterJSONFrame", filterJSONFrame);
 
 function preprocessFilterExpression(filterExpression) {
