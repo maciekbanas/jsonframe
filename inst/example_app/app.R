@@ -26,6 +26,11 @@ ui <- fluidPage(
       actionButton("filter_btn", "Apply Filter")
     ),
     mainPanel(
+      shiny::h2("Dataset name"),
+      textOutput("dataset_name"),
+      shiny::h2("Filtering expression translated"),
+      textOutput("filter_translation"),
+      shiny::h2("Dataset"),
       textOutput("json_string")
     )
   )
@@ -37,6 +42,14 @@ server <- function(input, output, session) {
   
   shiny::observeEvent(input$filter_btn, {
     my_json_frame$filter(input, input$filter_expression)
+  })
+  
+  output$dataset_name <- shiny::renderText({
+    my_json_frame$get_data_name(input)
+  })
+  
+  output$filter_translation <- shiny::renderText({
+    my_json_frame$get_translation(input)
   })
   
   output$json_string <- shiny::renderText({

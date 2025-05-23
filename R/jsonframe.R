@@ -32,6 +32,18 @@ JSONFrame <- R6::R6Class(
     get_json = function(input, session = shiny::getDefaultReactiveDomain()) {
       as.character(input$json_frame)
     },
+    #' @description Retrieve `JSON` translation.
+    #' @param input A `Shiny` input parameter.
+    #' @param session A `Shiny` session parameter.
+    get_translation = function(input, session = shiny::getDefaultReactiveDomain()) {
+      as.character(input$jsonframe_translation)
+    },
+    #' @description Print data name.
+    #' @param input A `Shiny` input parameter.
+    #' @param session A `Shiny` session parameter.
+    get_data_name = function(input, session = shiny::getDefaultReactiveDomain()) {
+      private$original_data
+    },
     #' @description Send `JSON` data to the browser.
     #' @param input A `Shiny` input parameter.
     #' @param filter_expression A character, filtering expression (e.g. "{var} >= 0").

@@ -7,6 +7,7 @@ Shiny.addCustomMessageHandler("sendJSONFrame", sendJSONFrame);
 function filterJSONFrame(params) {
   let data = eval(params.original_data);
   let filterExpression = preprocessFilterExpression(params.filter_expression);
+  Shiny.setInputValue("jsonframe_translation", filterExpression);
   let filteredJSON = filterData(data, filterExpression);
   Shiny.setInputValue("json_frame", JSON.stringify(filteredJSON));
 }
@@ -14,8 +15,14 @@ function filterJSONFrame(params) {
 Shiny.addCustomMessageHandler("filterJSONFrame", filterJSONFrame);
 
 function preprocessFilterExpression(filterExpression) {
-  const regex = /\b([a-zA-Z_]\w*)\b(?=(?:[^"']*"[^"']*")*[^"']*$)(?![\'\.])/g;
-  const processedExpression = filterExpression.replace(regex, "item.$1");
+  const regex = /(\b[a-zA-Z_]\w*\b)(?=(?:(?:[^'"\\]*["'][^'"\\]*["'])*[^'"\\]*$)(?![\'\.]))/g;
+  const processedExpression = filterExpression.replace(regex, (match) => {
+    if (/['"]/.test(match)) {
+      return match;
+    } else {
+      return 'item.' + match;
+    }
+  });
   return processedExpression;
 }
 

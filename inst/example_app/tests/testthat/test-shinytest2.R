@@ -42,9 +42,20 @@ test_that("filtering by number (equation) works", {
   )
 })
 
-test_that("filtering by single character works", {
+test_that("filtering by single character (double quotes) works", {
   app <- AppDriver$new(name = "Apply age filter")
   app$set_inputs(filter_expression = 'name == "David"')
+  app$click("filter_btn")
+  json_string_filtered <- app$get_value(output = "json_string")
+  expect_equal(
+    json_string_filtered,
+    "[{\"name\":\"David\",\"age\":40,\"city\":\"Chicago\"}]"
+  )
+})
+
+test_that("filtering by single character (single quotes) works", {
+  app <- AppDriver$new(name = "Apply age filter")
+  app$set_inputs(filter_expression = "name == 'David'")
   app$click("filter_btn")
   json_string_filtered <- app$get_value(output = "json_string")
   expect_equal(
@@ -61,5 +72,16 @@ test_that("filtering by single character with spaces works", {
   expect_equal(
     json_string_filtered,
     "[{\"name\":\"Alice\",\"age\":25,\"city\":\"New York\"},{\"name\":\"Eve\",\"age\":28,\"city\":\"New York\"},{\"name\":\"Ivan\",\"age\":50,\"city\":\"New York\"}]"
+  )
+})
+
+test_that("filtering by single character with spaces (single quotes) works", {
+  app <- AppDriver$new(name = "Apply age filter")
+  app$set_inputs(filter_expression = "city == 'Los Angeles'")
+  app$click("filter_btn")
+  json_string_filtered <- app$get_value(output = "json_string")
+  expect_equal(
+    json_string_filtered,
+    "[{\"name\":\"Charlie\",\"age\":35,\"city\":\"Los Angeles\"},{\"name\":\"Nathan\",\"age\":42,\"city\":\"Los Angeles\"}]"
   )
 })
