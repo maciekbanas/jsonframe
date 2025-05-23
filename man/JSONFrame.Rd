@@ -21,7 +21,7 @@ A \code{JSONFrame} class.
 \if{html}{\out{<a id="method-JSONFrame-new"></a>}}
 \if{latex}{\out{\hypertarget{method-JSONFrame-new}{}}}
 \subsection{Method \code{new()}}{
-Send \code{JSON} data to the browser.
+Register \code{JSON} data in the browser.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{JSONFrame$new(input, json_data, session = shiny::getDefaultReactiveDomain())}\if{html}{\out{</div>}}
 }

@@ -18,7 +18,7 @@ include_jsonframe <- function() {
 JSONFrame <- R6::R6Class(
   "JSONFrame",
   public = list(
-    #' @description Send `JSON` data to the browser.
+    #' @description Register `JSON` data in the browser.
     #' @param input A `Shiny` input parameter.
     #' @param json_data A character - should mirror JSON data structure.
     #' @param session A `Shiny` session parameter.
