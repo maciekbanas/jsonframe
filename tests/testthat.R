@@ -7,6 +7,7 @@
 # * https://testthat.r-lib.org/articles/special-files.html
 
 library(testthat)
+library(shinytest2)
 library(jsonframe)
 
 test_check("jsonframe")

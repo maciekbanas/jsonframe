@@ -1,8 +1,8 @@
 Package: jsonframe
 Title: Process Data In Browser
-Version: 0.0.0.9001
+Version: 0.0.0.9002
 Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"),
+    person("Maciej", "Banas", , "banasmaciek@gmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "YOUR-ORCID-ID"))
 Description: What the package does (one paragraph).
 License: MIT + file LICENSE
@@ -14,5 +14,6 @@ Imports:
     shiny,
     R6
 Suggests: 
+    shinytest2,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3

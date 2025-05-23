@@ -21,7 +21,7 @@ A \code{JSONFrame} class.
 \if{html}{\out{<a id="method-JSONFrame-new"></a>}}
 \if{latex}{\out{\hypertarget{method-JSONFrame-new}{}}}
 \subsection{Method \code{new()}}{
-Send \code{JSON} data to the browser.
+Register \code{JSON} data in the browser.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{JSONFrame$new(input, json_data, session = shiny::getDefaultReactiveDomain())}\if{html}{\out{</div>}}
 }
@@ -44,13 +44,15 @@ Send \code{JSON} data to the browser.
 \subsection{Method \code{get_json()}}{
 Retrieve \code{JSON} from the browser.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{JSONFrame$get_json(input)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{JSONFrame$get_json(input, session = shiny::getDefaultReactiveDomain())}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
 \item{\code{input}}{A \code{Shiny} input parameter.}
+
+\item{\code{session}}{A \code{Shiny} session parameter.}
 }
 \if{html}{\out{</div>}}
 }
