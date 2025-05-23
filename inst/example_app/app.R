@@ -1,7 +1,7 @@
-pkgload::load_all()
+library(jsonframe)
 
 ui <- fluidPage(
-  jsonframe::include_jsonframe(),
+  include_jsonframe(),
   shiny::tags$head(
     shiny::tags$script('
     var example_json = [{"name": "Alice", "age": 25, "city": "New York"},
@@ -33,7 +33,7 @@ ui <- fluidPage(
 
 server <- function(input, output, session) {
   
-  my_json_frame <- jsonframe::JSONFrame$new(input, "example_json")
+  my_json_frame <- JSONFrame$new(input, "example_json")
   
   shiny::observeEvent(input$filter_btn, {
     my_json_frame$filter(input, input$filter_expression)
