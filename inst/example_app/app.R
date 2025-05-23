@@ -23,11 +23,10 @@ ui <- fluidPage(
   sidebarLayout(
     sidebarPanel(
       textInput("filter_expression", "Filter Expression", value = ""),
-      actionButton("filter_btn", "Apply Filter"),
-      textOutput("json_string")
+      actionButton("filter_btn", "Apply Filter")
     ),
     mainPanel(
-      tableOutput("data_table")
+      textOutput("json_string")
     )
   )
 )
