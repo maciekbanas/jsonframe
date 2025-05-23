@@ -45,12 +45,6 @@ jobs:
           extra-packages: any::rcmdcheck
           needs: check
       
-      - name: Install remotes package
-        run: Rscript -e 'install.packages("remotes")'
-
-      - name: Install jsonframe package
-        run: Rscript -e 'remotes::install_github("maciekbanas/jsonframe@13-fetch-as-input-data-on-browser-side")'
-
       - uses: r-lib/actions/check-r-package@v2
         with:
           upload-snapshots: true
